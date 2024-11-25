@@ -62,8 +62,8 @@ jobs:
         working-directory: ./mp2
 
       - name: Run tests
-        run: npx jest --config jest.config.ts
-        working-directory: ./mmp2
+        run: npx jest --config jest.config.js
+        working-directory: ./mp2
 
       - name: List coverage files
         run: |
