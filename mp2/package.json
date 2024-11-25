@@ -15,7 +15,7 @@
     "format": "prettier --write .",
     "eject": "react-scripts eject",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint ."
   },
   "jest": {
     "testMatch": [
