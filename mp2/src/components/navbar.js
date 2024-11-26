@@ -29,7 +29,11 @@ const Navbar = (props) => {
       <NavBarToggle onClick={toggleNavBar}>
         <Hamburger />
       </NavBarToggle>
-      <Logo src={logo} alt="Logo" />
+
+      <NavLink to="/">
+        <Logo src={logo} alt="Logo" />
+      </NavLink>
+
       <MainNav style={{ display: displayNav }}>
         <NavLi>
           <NavLink to="/">Main</NavLink>

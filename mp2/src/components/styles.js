@@ -65,13 +65,14 @@ export const Hamburger = styled.img`
 
 export const Container = styled.div`
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: Effra, sans-serif;
   margin: 20px;
 `;
 
 export const CardGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   margin: 20px 0;
 `;
@@ -83,6 +84,8 @@ export const Card = styled.div`
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+  flex: 1 1 250px; /* Ajuste o tamanho conforme necessário */
+  max-width: 300px; /* Ajuste o tamanho conforme necessário */
 
   &:hover {
     transform: scale(1.05);

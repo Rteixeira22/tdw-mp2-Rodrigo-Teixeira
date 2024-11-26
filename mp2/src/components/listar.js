@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux"; // Para acessar os filtros do Redux
+import { useSelector } from "react-redux";
 import { useGetCharactersQuery } from "./apiRequest";
+import { Link } from "react-router-dom";
 import {
   Container,
   CardGrid,
@@ -12,9 +13,8 @@ import {
 
 function Listar() {
   const [page, setPage] = useState(1);
-  const filters = useSelector((state) => state.filters); // Obtendo filtros do Redux
+  const filters = useSelector((state) => state.filters);
 
-  // Passando os filtros e a página para a consulta da API
   const { data, error, isLoading } = useGetCharactersQuery({ page, filters });
 
   if (isLoading) return <p>Loading...</p>;
@@ -24,23 +24,31 @@ function Listar() {
     <Container>
       <h1>Characters</h1>
       <CardGrid>
-        {data.map((character) => (
-          <Card key={character.url}>
-            <CardTitle>{character.name || "Unknown Name"}</CardTitle>
-            <CardText>
-              <strong>Aliases:</strong>{" "}
-              {character.aliases.length > 0
-                ? character.aliases.join(", ")
-                : "None"}
-            </CardText>
-            <CardText>
-              <strong>Culture:</strong> {character.culture || "Unknown"}
-            </CardText>
-            <CardText>
-              <strong>Gender:</strong> {character.gender || "Unknown"}
-            </CardText>
-          </Card>
-        ))}
+        {data.map(
+          (character) => (
+            console.log("Character:", character),
+            (
+              <Card key={character.url}>
+                <CardTitle>{character.name || "Unknown Name"}</CardTitle>
+                <CardText>
+                  <strong>Aliases:</strong>{" "}
+                  {character.aliases.length > 0
+                    ? character.aliases.join(", ")
+                    : "None"}
+                </CardText>
+                <CardText>
+                  <strong>Culture:</strong> {character.culture || "Unknown"}
+                </CardText>
+                <CardText>
+                  <strong>Gender:</strong> {character.gender || "Unknown"}
+                </CardText>
+                <Link to={`/details/${character.url.split("/").pop()}`}>
+                  See Details
+                </Link>
+              </Card>
+            )
+          ),
+        )}
       </CardGrid>
       <Pagination>
         <button

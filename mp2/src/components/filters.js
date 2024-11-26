@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"; // Para acessar e despachar filtros
-import { setFilters } from "./filtersSlice"; // Importar ação para atualizar filtros
+import { useDispatch, useSelector } from "react-redux";
+import { setFilters } from "./filtersSlice";
 import { FilterContainer, FilterItem } from "./styles";
 
 function Filtros() {
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters); // Acessar filtros do Redux
+  const filters = useSelector((state) => state.filters); // Aceder filtros do Redux
 
   // Estado local para manter as opções que virão da API
   const [genders, setGenders] = useState([]);
@@ -13,7 +13,7 @@ function Filtros() {
   const [seasons, setSeasons] = useState([]);
 
   useEffect(() => {
-    // Simulação da obtenção de dados para opções (isso deve vir da API)
+    // Simulação da obtenção de dados para opções
     setGenders(["Male", "Female", "Unknown"]);
     setCultures(["Northmen", "Free Folk", "Dothraki", "Unknown"]);
     setSeasons([1, 2, 3, 4, 5]);
@@ -28,7 +28,6 @@ function Filtros() {
 
   return (
     <div>
-      <h1>Filtros</h1>
       <FilterContainer>
         <FilterItem>
           <label>
@@ -79,6 +78,18 @@ function Filtros() {
                 </option>
               ))}
             </select>
+          </label>
+        </FilterItem>
+        <FilterItem>
+          <label>
+            Search by Name:
+            <input
+              type="text"
+              name="name"
+              value={filters.name}
+              onChange={handleFilterChange}
+              placeholder="Search by name"
+            />
           </label>
         </FilterItem>
       </FilterContainer>

@@ -2,29 +2,28 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiRequest = createApi({
   reducerPath: "apiRequest",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://anapioficeandfire.com/api/" }), // substitua pela URL da sua API
+  baseQuery: fetchBaseQuery({ baseUrl: "https://anapioficeandfire.com/api/" }),
   endpoints: (builder) => ({
     getCharacters: builder.query({
       query: ({ page, filters }) => {
-        const { gender, culture, seasons } = filters;
+        const { gender, culture, seasons, name } = filters;
         let query = `characters?page=${page}`;
 
         // Adiciona os filtros à URL da API
         if (gender) query += `&gender=${gender}`;
         if (culture) query += `&culture=${culture}`;
         if (seasons) query += `&seasons=${seasons}`;
-
-        console.log("Query URL: ", query);
+        if (name) query += `&name=${name}`;
 
         return query;
       },
-      transformResponse: (response, meta, arg) => {
-        console.log("API Response: ", response); // Log da resposta da API para depuração
+      transformResponse: (response) => {
+        console.log("API Response: ", response);
         return response;
       },
-      // Em caso de erro, podemos também ver o status da resposta
+
       onError: (error) => {
-        console.log("API Error: ", error); // Log do erro da API
+        console.log("API Error: ", error);
       },
     }),
   }),
