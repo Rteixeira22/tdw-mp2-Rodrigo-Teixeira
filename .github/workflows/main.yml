@@ -45,11 +45,6 @@ jobs:
         run: npm install
         working-directory: ./mp2
 
-      - name: List coverage files
-        run: |
-          echo "Listing coverage files..."
-          ls -R ./mp2/coverage
-
       - name: Jest
         run: npm run coverage
         working-directory: ./mp2
