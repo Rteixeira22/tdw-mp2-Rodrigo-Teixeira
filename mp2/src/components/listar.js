@@ -6,20 +6,30 @@ import {
   MealTitle,
   MealImage,
   MealCategorySelect,
-} from "./styles"; // Importando os estilos
+} from "./styles";
 import { Link } from "react-router-dom";
+import { setSelectedMealId } from "./mealSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function MealList() {
-  const [category, setCategory] = useState("Seafood"); // Categoria padrão
+  const [category, setCategory] = useState("Seafood");
   const {
     data: meals,
     isLoading,
     error,
   } = useFetchMealsByCategoryQuery(category);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (isLoading) return <p>Loading meals...</p>;
   if (error)
     return <p>Error fetching meals: {error.data?.message || error.error}</p>;
+
+  /*  const handleCardClick = (meal) => {
+    dispatch(setSelectedMealId(meal.idMeal));
+    navigate("/details");
+  }; */
 
   return (
     <MealListContainer>
@@ -39,6 +49,7 @@ function MealList() {
           <MealCard key={meal.idMeal}>
             <MealImage src={meal.strMealThumb} alt={meal.strMeal} />
             <MealTitle>{meal.strMeal}</MealTitle>
+            <p>{meal.idMeal}</p>
             <Link to={`/details/${meal.idMeal}`}>View Details</Link>
           </MealCard>
         ))}

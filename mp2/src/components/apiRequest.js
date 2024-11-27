@@ -6,13 +6,14 @@ export const mealsApi = createApi({
     baseUrl: "https://www.themealdb.com/api/json/v1/1/",
   }),
   endpoints: (builder) => ({
-    // Listar refeições por categoria
     fetchMealsByCategory: builder.query({
-      query: (category) => `filter.php?c=${category}`, // Filtra refeições pela categoria
+      query: (category) => `filter.php?c=${category}`,
     }),
-    // Detalhes de uma refeição específica
     fetchMealById: builder.query({
-      query: (mealId) => `lookup.php?i=${mealId}`, // Busca refeição pelo ID
+      query: (mealId) => {
+        console.log("Fetching meal with ID:", mealId);
+        return `lookup.php?i=${mealId}`;
+      },
     }),
   }),
 });
