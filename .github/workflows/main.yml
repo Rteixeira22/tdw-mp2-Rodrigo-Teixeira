@@ -6,28 +6,12 @@ on:
       - main
   pull_request:
     branches:
-      - main    
+      - main
   workflow_dispatch:
-  
+
 jobs:
-  Install-Dependencies:
+  Run-Lint:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "22"
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./mp2
-
-  Run-Lint: 
-    runs-on: ubuntu-latest
-    needs: Install-Dependencies
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -99,16 +83,14 @@ jobs:
         run: npx prettier --write --check .
         working-directory: ./mp2
 
-
-
   Vercel-Preview-Deploy:
     runs-on: ubuntu-latest
     needs: Run-Prettier
-    
+
     env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
     steps:
       - name: Checkout code
@@ -127,11 +109,11 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Configure Vercel for Preview
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} 
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: ./mp2
 
       - name: Build Project Artifacts
-        run: | 
+        run: |
           vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
           vercel build --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: ./mp2
@@ -140,15 +122,14 @@ jobs:
         run: vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
         working-directory: ./mp2
 
-        
   Vercel-Prod-Deploy:
     runs-on: ubuntu-latest
     needs: Vercel-Preview-Deploy
-    
+
     env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
     steps:
       - name: Checkout code
@@ -167,16 +148,14 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Configure Vercel for Production
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} 
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
-        run: | 
+        run: |
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: ./mp2
 
       - name: Deploy to Vercel
-        run: vercel deploy --prebuilt --prod --token ${{ secrets.VERCEL_TOKEN }} 
+        run: vercel deploy --prebuilt --prod --token ${{ secrets.VERCEL_TOKEN }}
         working-directory: ./mp2
-
-

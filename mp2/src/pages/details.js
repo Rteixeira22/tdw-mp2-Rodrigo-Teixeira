@@ -12,12 +12,18 @@ import {
 } from "../components/styles";
 import { Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import Loader from "../components/loader";
 
 function MealDetails() {
   const { mealId } = useParams();
   const { data: meal, isLoading, error } = useFetchMealByIdQuery(mealId);
 
-  if (isLoading) return <p>Loading details...</p>;
+  if (isLoading)
+    return (
+      <p>
+        <Loader />
+      </p>
+    );
   if (error)
     return <p>Error fetching details: {error.data?.message || error.error}</p>;
 
