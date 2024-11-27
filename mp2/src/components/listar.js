@@ -9,14 +9,29 @@ import {
   ButtonLink,
 } from "./styles";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 function MealList() {
-  const [category, setCategory] = useState("Seafood");
+  const [category, setCategory] = useState("beef");
+  const [categories, setCategories] = useState([]);
+
   const {
     data: meals,
     isLoading,
     error,
   } = useFetchMealsByCategoryQuery(category);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/categories.php",
+      );
+      const data = await response.json();
+      setCategories(data.categories);
+    };
+
+    fetchCategories();
+  }, []);
 
   if (isLoading) return <p>Loading meals...</p>;
   if (error)
@@ -29,10 +44,11 @@ function MealList() {
         onChange={(e) => setCategory(e.target.value)}
         value={category}
       >
-        <option value="Seafood">Seafood</option>
-        <option value="Dessert">Dessert</option>
-        <option value="Beef">Beef</option>
-        <option value="Vegetarian">Vegetarian</option>
+        {categories.map((cat) => (
+          <option key={cat.strCategory} value={cat.strCategory}>
+            {cat.strCategory}
+          </option>
+        ))}
       </MealCategorySelect>
 
       <div className="meal-cards">

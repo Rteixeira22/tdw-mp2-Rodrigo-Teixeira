@@ -200,7 +200,8 @@ export const ContainerDetails = styled.div`
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 50px;
+  margin-bottom: 100px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -244,18 +245,18 @@ export const Instructions = styled.div`
 
 export const ButtonLink = styled.button`
   display: inline-block;
-  padding: 8px 16px; /* Reduzi o padding */
+  padding: 8px 16px;
   margin-top: 15px;
   background-color: #009dff;
   opacity: 0.9;
   color: #fff;
   border: none;
-  border-radius: 20px; /* Torna o botão mais arredondado, mas proporcional */
-  font-size: 0.9rem; /* Texto menor */
-  font-weight: 500; /* Peso da fonte ligeiramente reduzido */
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 3px 5px rgba(0, 123, 255, 0.3); /* Sombra mais discreta */
+  box-shadow: 0 3px 5px rgba(0, 123, 255, 0.3);
   cursor: pointer;
   transition:
     background-color 0.3s ease,
@@ -265,7 +266,7 @@ export const ButtonLink = styled.button`
   &:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0, 86, 179, 0.3); /* Sombra mais leve */
+    box-shadow: 0 5px 10px rgba(0, 86, 179, 0.3);
   }
 
   &:active {
@@ -285,5 +286,40 @@ export const VideoSection = styled.div`
   h2 {
     font-size: 1.5rem;
     margin-bottom: 15px;
+  }
+`;
+
+export const ButtonBack = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  margin-top: 30px;
+  margin-left: 200px;
+  background-color: #009dff;
+  opacity: 0.9;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 3px 5px rgba(0, 123, 255, 0.3);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 86, 179, 0.3);
+  }
+
+  &:active {
+    background-color: #004085;
+    transform: translateY(0);
+    box-shadow: 0 3px 5px rgba(0, 64, 133, 0.3);
   }
 `;
