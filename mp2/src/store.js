@@ -1,15 +1,16 @@
-// src/store.js
+// store.js
 import { configureStore } from "@reduxjs/toolkit";
-import { apiRequest } from "./components/apiRequest";
 import filtersReducer from "./components/filtersSlice";
+import { mealsApi } from "./components/apiRequest";
 
+// Configure a store com o reducer de filtros e a API de refeições
 const store = configureStore({
   reducer: {
-    [apiRequest.reducerPath]: apiRequest.reducer,
     filters: filtersReducer,
+    [mealsApi.reducerPath]: mealsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiRequest.middleware),
+    getDefaultMiddleware().concat(mealsApi.middleware),
 });
 
 export default store;

@@ -5,18 +5,23 @@ import { FilterContainer, FilterItem } from "./styles";
 
 function Filtros() {
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters); // Aceder filtros do Redux
+  const filters = useSelector((state) => state.filters || {});
 
-  // Estado local para manter as opções que virão da API
-  const [genders, setGenders] = useState([]);
-  const [cultures, setCultures] = useState([]);
-  const [seasons, setSeasons] = useState([]);
+  // Estado local para as opções (vindas da API ou estáticas)
+  const [categories, setCategories] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  const [cuisines, setCuisines] = useState([]);
+  const [priceRanges, setPriceRanges] = useState([
+    { label: "Under 10", value: "0-10" },
+    { label: "10 - 20", value: "10-20" },
+    { label: "Above 20", value: "20-" },
+  ]);
 
   useEffect(() => {
-    // Simulação da obtenção de dados para opções
-    setGenders(["Male", "Female", "Unknown"]);
-    setCultures(["Northmen", "Free Folk", "Dothraki", "Unknown"]);
-    setSeasons([1, 2, 3, 4, 5]);
+    // Supondo que a API forneça categorias, ingredientes e cozinhas
+    setCategories(["Seafood", "Dessert", "Beef", "Vegetarian"]);
+    setIngredients(["Chicken", "Beef", "Pasta", "Rice"]);
+    setCuisines(["Italian", "Chinese", "Indian", "American"]);
   }, []);
 
   const handleFilterChange = (e) => {
@@ -31,55 +36,76 @@ function Filtros() {
       <FilterContainer>
         <FilterItem>
           <label>
-            Gender:
+            Category:
             <select
-              name="gender"
-              value={filters.gender}
+              name="category"
+              value={filters.category}
               onChange={handleFilterChange}
             >
-              <option value="">Select a Gender</option>
-              {genders.map((gender, idx) => (
-                <option key={idx} value={gender}>
-                  {gender}
+              <option value="">Select a Category</option>
+              {categories.map((category, idx) => (
+                <option key={idx} value={category}>
+                  {category}
                 </option>
               ))}
             </select>
           </label>
         </FilterItem>
+
         <FilterItem>
           <label>
-            Culture:
+            Ingredient:
             <select
-              name="culture"
-              value={filters.culture}
+              name="ingredient"
+              value={filters.ingredient}
               onChange={handleFilterChange}
             >
-              <option value="">Select a Culture</option>
-              {cultures.map((culture, idx) => (
-                <option key={idx} value={culture}>
-                  {culture}
+              <option value="">Select an Ingredient</option>
+              {ingredients.map((ingredient, idx) => (
+                <option key={idx} value={ingredient}>
+                  {ingredient}
                 </option>
               ))}
             </select>
           </label>
         </FilterItem>
+
         <FilterItem>
           <label>
-            Seasons:
+            Cuisine:
             <select
-              name="seasons"
-              value={filters.seasons}
+              name="cuisine"
+              value={filters.cuisine}
               onChange={handleFilterChange}
             >
-              <option value="">Select a Season</option>
-              {seasons.map((season, idx) => (
-                <option key={idx} value={season}>
-                  Season {season}
+              <option value="">Select a Cuisine</option>
+              {cuisines.map((cuisine, idx) => (
+                <option key={idx} value={cuisine}>
+                  {cuisine}
                 </option>
               ))}
             </select>
           </label>
         </FilterItem>
+
+        <FilterItem>
+          <label>
+            Price Range:
+            <select
+              name="priceRange"
+              value={filters.priceRange}
+              onChange={handleFilterChange}
+            >
+              <option value="">Select Price Range</option>
+              {priceRanges.map((range, idx) => (
+                <option key={idx} value={range.value}>
+                  {range.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </FilterItem>
+
         <FilterItem>
           <label>
             Search by Name:

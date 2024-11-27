@@ -1,53 +1,32 @@
-// src/pages/CharacterDetail.js
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Para pegar o ID da URL
+import React from "react";
+import { useFetchMealByIdQuery } from "../components/apiRequest";
 
-function Details() {
-  const { characterId } = useParams();
-  const [character, setCharacter] = useState(null);
+function MealDetails({ mealId }) {
+  const { data: meal, isLoading, error } = useFetchMealByIdQuery(mealId);
 
-  useEffect(() => {
-    const fetchDetails = async () => {
-      const response = await fetch(
-        `https://www.anapioficeandfire.com/api/characters/${characterId}`,
-      );
-      const data = await response.json();
-      setCharacter(data);
-    };
+  if (isLoading) return <p>Loading meal details...</p>;
+  if (error)
+    return (
+      <p>Error fetching meal details: {error.data?.message || error.error}</p>
+    );
 
-    fetchDetails();
-  }, [characterId]);
+  const mealDetails = meal?.meals?.[0];
 
-  if (!character) return <p>Loading...</p>;
+  console.log("Meal Details:", mealDetails);
 
   return (
     <div>
-      <h1>{character.name}</h1>
-      <p>
-        <strong>Gender:</strong> {character.gender}
-      </p>
-      <p>
-        <strong>Culture:</strong> {character.culture}
-      </p>
-      <p>
-        <strong>Born:</strong> {character.born}
-      </p>
-      <p>
-        <strong>Died:</strong> {character.died}
-      </p>
-      <p>
-        <strong>Titles:</strong>{" "}
-        {character.titles.length ? character.titles.join(", ") : "None"}
-      </p>
-      <p>
-        <strong>Aliases:</strong>{" "}
-        {character.aliases.length ? character.aliases.join(", ") : "None"}
-      </p>
-      <p>
-        <strong>Books:</strong> {character.books.join(", ")}
-      </p>
+      <h1>{mealDetails?.strMeal}</h1>
+      <img
+        src={mealDetails?.strMealThumb}
+        alt={mealDetails?.strMeal}
+        style={{ width: "300px" }}
+      />
+      <h3>Category: {mealDetails?.strCategory}</h3>
+      <h3>Area: {mealDetails?.strArea}</h3>
+      <p>{mealDetails?.strInstructions}</p>
     </div>
   );
 }
 
-export default Details;
+export default MealDetails;

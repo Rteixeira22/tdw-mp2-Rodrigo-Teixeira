@@ -1,18 +1,9 @@
-import React from "react";
 import styled from "styled-components";
-
-/*
- * This is a ready to use component, just import it and plop it into your project as:
- * <Navbar/>
- * You might want to move all the style components into separate files for readability
- * if you plan to do more with it.
- */
 
 export const Bar = styled.nav`
   font-size: 18px;
-  background-image: linear-gradient(260deg, #b0bec5, #1c1c1c 100%);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 10px;
+
+  box-shadow: 0 4px 2px -2px gray;
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-between;
@@ -35,14 +26,18 @@ export const MainNav = styled.ul`
 export const NavLi = styled.li`
   text-align: center;
   margin: 15px auto;
+  color: #000;
+  text-decoration: none;
 `;
-export const NavLink = styled.a`
-  list-style-type: none;
+export const NavA = styled.a`
   display: flex;
+  color: #000;
+  text-decoration: none;
   flex-direction: column;
   @media (min-width: 768px) {
     margin: 0px 10px;
   }
+  cursor: pointer;
 `;
 
 export const NavBarToggle = styled.span`
@@ -134,11 +129,66 @@ export const Pagination = styled.div`
 
 export const FilterContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px 0;
+  flex-direction: column;
+  padding: 20px;
 `;
 
 export const FilterItem = styled.div`
-  margin: 0 10px;
+  margin-bottom: 15px;
+
+  label {
+    font-weight: bold;
+  }
+
+  select,
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+`;
+
+export const MealListContainer = styled.div`
+  text-align: center;
+  padding: 20px;
+`;
+
+export const MealCategorySelect = styled.select`
+  padding: 10px;
+  font-size: 16px;
+  margin: 20px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+`;
+
+export const MealCard = styled.div`
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin: 15px;
+  padding: 15px;
+  width: 200px;
+  display: inline-block;
+  vertical-align: top;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export const MealImage = styled.img`
+  width: 100%;
+  border-radius: 8px;
+`;
+
+export const MealTitle = styled.h3`
+  font-size: 18px;
+  margin-top: 10px;
+  color: #333;
+  font-weight: bold;
 `;

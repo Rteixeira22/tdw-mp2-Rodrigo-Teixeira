@@ -1,32 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const apiRequest = createApi({
-  reducerPath: "apiRequest",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://anapioficeandfire.com/api/" }),
+export const mealsApi = createApi({
+  reducerPath: "mealsApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://www.themealdb.com/api/json/v1/1/",
+  }),
   endpoints: (builder) => ({
-    getCharacters: builder.query({
-      query: ({ page, filters }) => {
-        const { gender, culture, seasons, name } = filters;
-        let query = `characters?page=${page}`;
-
-        // Adiciona os filtros à URL da API
-        if (gender) query += `&gender=${gender}`;
-        if (culture) query += `&culture=${culture}`;
-        if (seasons) query += `&seasons=${seasons}`;
-        if (name) query += `&name=${name}`;
-
-        return query;
-      },
-      transformResponse: (response) => {
-        console.log("API Response: ", response);
-        return response;
-      },
-
-      onError: (error) => {
-        console.log("API Error: ", error);
-      },
+    // Listar refeições por categoria
+    fetchMealsByCategory: builder.query({
+      query: (category) => `filter.php?c=${category}`, // Filtra refeições pela categoria
+    }),
+    // Detalhes de uma refeição específica
+    fetchMealById: builder.query({
+      query: (mealId) => `lookup.php?i=${mealId}`, // Busca refeição pelo ID
     }),
   }),
 });
 
-export const { useGetCharactersQuery } = apiRequest;
+export const { useFetchMealsByCategoryQuery, useFetchMealByIdQuery } = mealsApi;

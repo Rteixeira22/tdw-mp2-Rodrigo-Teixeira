@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../imgs/logo.png";
 
-import { NavBarToggle, Hamburger, NavLi, Bar, MainNav } from "./styles";
+import { NavBarToggle, Hamburger, NavLi, Bar, MainNav, NavA } from "./styles";
 
 const Logo = styled.img`
   display: inline-block;
@@ -30,22 +30,13 @@ const Navbar = (props) => {
         <Hamburger />
       </NavBarToggle>
 
-      <NavLink to="/">
+      <NavA to="/">
         <Logo src={logo} alt="Logo" />
-      </NavLink>
+      </NavA>
 
       <MainNav style={{ display: displayNav }}>
         <NavLi>
-          <NavLink to="/">Main</NavLink>
-        </NavLi>
-        <NavLi>
-          <NavLink to="/">Search</NavLink>
-        </NavLi>
-        <NavLi>
-          <NavLink to="/">Avocados</NavLink>
-        </NavLi>
-        <NavLi>
-          <NavLink to="/">Login</NavLink>
+          <NavA to="/">About</NavA>
         </NavLi>
       </MainNav>
     </Bar>
