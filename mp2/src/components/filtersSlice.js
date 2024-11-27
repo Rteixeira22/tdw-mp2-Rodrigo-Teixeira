@@ -14,14 +14,13 @@ const filtersSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action) => {
-      return { ...state, ...action.payload }; // Atualiza os filtros no estado
+      return { ...state, ...action.payload };
     },
-    resetFilters: () => initialState, // Reseta os filtros para o estado inicial
+    resetFilters: () => initialState,
   },
 });
 
 // Exportando as ações
 export const { setFilters, resetFilters } = filtersSlice.actions;
 
-// Exportando o reducer para ser utilizado na store
 export default filtersSlice.reducer;
