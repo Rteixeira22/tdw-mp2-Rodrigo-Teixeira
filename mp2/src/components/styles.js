@@ -323,3 +323,31 @@ export const ButtonBack = styled.button`
     box-shadow: 0 3px 5px rgba(0, 64, 133, 0.3);
   }
 `;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+`;
+
+export const PaginationButton = styled.button`
+  padding: 8px 16px;
+  background-color: #009dff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #007acc;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;

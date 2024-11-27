@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFetchMealsByCategoryQuery } from "./apiRequest";
 import {
   MealCard,
@@ -7,13 +7,16 @@ import {
   MealImage,
   MealCategorySelect,
   ButtonLink,
+  PaginationContainer,
+  PaginationButton,
 } from "./styles";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 function MealList() {
-  const [category, setCategory] = useState("beef");
+  const [category, setCategory] = useState("Beef");
   const [categories, setCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
   const {
     data: meals,
@@ -37,11 +40,28 @@ function MealList() {
   if (error)
     return <p>Error fetching meals: {error.data?.message || error.error}</p>;
 
+  const totalMeals = meals?.meals || [];
+  const totalPages = Math.ceil(totalMeals.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentMeals = totalMeals.slice(startIndex, startIndex + itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
+  };
+
   return (
     <MealListContainer>
       <h1>Meals in Category: {category}</h1>
+
       <MealCategorySelect
-        onChange={(e) => setCategory(e.target.value)}
+        onChange={(e) => {
+          setCategory(e.target.value);
+          setCurrentPage(1);
+        }}
         value={category}
       >
         {categories.map((cat) => (
@@ -52,7 +72,7 @@ function MealList() {
       </MealCategorySelect>
 
       <div className="meal-cards">
-        {meals?.meals?.map((meal) => (
+        {currentMeals.map((meal) => (
           <MealCard key={meal.idMeal}>
             <MealImage src={meal.strMealThumb} alt={meal.strMeal} />
             <MealTitle>{meal.strMeal}</MealTitle>
@@ -63,6 +83,24 @@ function MealList() {
           </MealCard>
         ))}
       </div>
+
+      <PaginationContainer>
+        <PaginationButton
+          disabled={currentPage === 1}
+          onClick={handlePreviousPage}
+        >
+          Previous
+        </PaginationButton>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <PaginationButton
+          disabled={currentPage === totalPages}
+          onClick={handleNextPage}
+        >
+          Next
+        </PaginationButton>
+      </PaginationContainer>
     </MealListContainer>
   );
 }
