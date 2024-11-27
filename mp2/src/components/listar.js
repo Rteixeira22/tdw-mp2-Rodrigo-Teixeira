@@ -6,6 +6,7 @@ import {
   MealTitle,
   MealImage,
   MealCategorySelect,
+  ButtonLink,
 } from "./styles";
 import { Link } from "react-router-dom";
 import { setSelectedMealId } from "./mealSlice";
@@ -49,8 +50,10 @@ function MealList() {
           <MealCard key={meal.idMeal}>
             <MealImage src={meal.strMealThumb} alt={meal.strMeal} />
             <MealTitle>{meal.strMeal}</MealTitle>
-            <p>{meal.idMeal}</p>
-            <Link to={`/details/${meal.idMeal}`}>View Details</Link>
+
+            <Link to={`/details/${meal.idMeal}`}>
+              <ButtonLink>View Details</ButtonLink>
+            </Link>
           </MealCard>
         ))}
       </div>

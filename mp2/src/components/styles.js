@@ -79,8 +79,8 @@ export const Card = styled.div`
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
-  flex: 1 1 250px; /* Ajuste o tamanho conforme necessário */
-  max-width: 300px; /* Ajuste o tamanho conforme necessário */
+  flex: 1 1 250px;
+  max-width: 300px;
 
   &:hover {
     transform: scale(1.05);
@@ -168,6 +168,7 @@ export const MealCard = styled.div`
   margin: 15px;
   padding: 15px;
   width: 200px;
+  height: 325px;
   display: inline-block;
   vertical-align: top;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -191,4 +192,85 @@ export const MealTitle = styled.h3`
   margin-top: 10px;
   color: #333;
   font-weight: bold;
+`;
+
+export const ContainerDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 100px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+`;
+
+export const DetailsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+export const MealImageDetails = styled.img`
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+`;
+
+export const IngredientsList = styled.ul`
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: disc;
+  li {
+    margin-bottom: 5px;
+  }
+`;
+
+export const Instructions = styled.div`
+  margin-top: 20px;
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  p {
+    line-height: 1.6;
+  }
+`;
+
+export const ButtonLink = styled.button`
+  display: inline-block;
+  padding: 8px 16px; /* Reduzi o padding */
+  margin-top: 15px;
+  background-color: #009dff;
+  opacity: 0.9;
+  color: #fff;
+  border: none;
+  border-radius: 20px; /* Torna o botão mais arredondado, mas proporcional */
+  font-size: 0.9rem; /* Texto menor */
+  font-weight: 500; /* Peso da fonte ligeiramente reduzido */
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 3px 5px rgba(0, 123, 255, 0.3); /* Sombra mais discreta */
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 86, 179, 0.3); /* Sombra mais leve */
+  }
+
+  &:active {
+    background-color: #004085;
+    transform: translateY(0);
+    box-shadow: 0 3px 5px rgba(0, 64, 133, 0.3);
+  }
 `;
