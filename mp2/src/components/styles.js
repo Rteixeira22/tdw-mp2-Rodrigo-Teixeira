@@ -168,8 +168,9 @@ export const MealCard = styled.div`
   margin: 15px;
   padding: 15px;
   width: 200px;
-  height: 325px;
+  height: 350px;
   display: inline-block;
+
   vertical-align: top;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition:
