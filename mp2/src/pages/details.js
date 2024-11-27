@@ -7,6 +7,7 @@ import {
   DetailsWrapper,
   IngredientsList,
   Instructions,
+  VideoSection,
 } from "../components/styles";
 
 function MealDetails() {
@@ -23,6 +24,7 @@ function MealDetails() {
     <ContainerDetails>
       {meal.meals?.map((meal) => (
         <div key={meal.idMeal}>
+          {console.log(meal)}
           <DetailsWrapper>
             <MealImageDetails src={meal.strMealThumb} alt={meal.strMeal} />
             <div>
@@ -45,6 +47,19 @@ function MealDetails() {
             <h2>Instructions</h2>
             <p>{meal.strInstructions}</p>
           </Instructions>
+          {meal.strYoutube && (
+            <VideoSection>
+              <iframe
+                title="YouTube video player"
+                width="560"
+                height="315"
+                src={meal.strYoutube.replace("watch?v=", "embed/")}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </VideoSection>
+          )}
         </div>
       ))}
     </ContainerDetails>

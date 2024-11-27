@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../imgs/logo.png";
 
@@ -30,14 +30,16 @@ const Navbar = (props) => {
         <Hamburger />
       </NavBarToggle>
 
-      <NavA to="/">
-        <Logo src={logo} alt="Logo" />
-      </NavA>
+      <div to="/">
+        <Link to="/">
+          <Logo src={logo} alt="Logo" />
+        </Link>
+      </div>
 
       <MainNav style={{ display: displayNav }}>
-        <NavLi>
-          <NavA to="/">About</NavA>
-        </NavLi>
+        <Link to="/">
+          <NavA>About</NavA>
+        </Link>
       </MainNav>
     </Bar>
   );

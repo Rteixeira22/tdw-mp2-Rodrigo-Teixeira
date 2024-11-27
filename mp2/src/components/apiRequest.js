@@ -11,7 +11,6 @@ export const mealsApi = createApi({
     }),
     fetchMealById: builder.query({
       query: (mealId) => {
-        console.log("Fetching meal with ID:", mealId);
         return `lookup.php?i=${mealId}`;
       },
     }),

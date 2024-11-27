@@ -7,7 +7,6 @@ const mealSlice = createSlice({
   },
   reducers: {
     setSelectedMealId: (state, action) => {
-      console.log("Selected Meal ID:", action.payload);
       state.selectedMealId = action.payload;
     },
   },

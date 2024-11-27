@@ -9,9 +9,6 @@ import {
   ButtonLink,
 } from "./styles";
 import { Link } from "react-router-dom";
-import { setSelectedMealId } from "./mealSlice";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 function MealList() {
   const [category, setCategory] = useState("Seafood");
@@ -20,17 +17,10 @@ function MealList() {
     isLoading,
     error,
   } = useFetchMealsByCategoryQuery(category);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   if (isLoading) return <p>Loading meals...</p>;
   if (error)
     return <p>Error fetching meals: {error.data?.message || error.error}</p>;
-
-  /*  const handleCardClick = (meal) => {
-    dispatch(setSelectedMealId(meal.idMeal));
-    navigate("/details");
-  }; */
 
   return (
     <MealListContainer>

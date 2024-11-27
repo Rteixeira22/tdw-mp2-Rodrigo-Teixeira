@@ -8,7 +8,7 @@ export const Bar = styled.nav`
     display: flex;
     justify-content: space-between;
     padding-bottom: 0;
-    height: 70px;
+    height: 100px;
     align-items: center;
   }
 `;
@@ -272,5 +272,18 @@ export const ButtonLink = styled.button`
     background-color: #004085;
     transform: translateY(0);
     box-shadow: 0 3px 5px rgba(0, 64, 133, 0.3);
+  }
+`;
+
+export const VideoSection = styled.div`
+  margin-top: 30px;
+  text-align: center;
+  iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
   }
 `;
