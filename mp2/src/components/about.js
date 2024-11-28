@@ -20,7 +20,7 @@ import {
   Image,
   StyledIcon,
   IconWithText,
-} from "./styles";
+} from "../styles/styles";
 
 function About() {
   return (

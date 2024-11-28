@@ -1,4 +1,3 @@
-// store.js
 import { configureStore } from "@reduxjs/toolkit";
 import filtersReducer from "./components/filtersSlice";
 import { mealsApi } from "./components/apiRequest";
