@@ -6,6 +6,7 @@ import Navbar from "./components/navbar";
 import { Provider } from "react-redux";
 import store from "./store";
 import Details from "./pages/details";
+import About from "./components/about";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/details/:mealId" element={<Details />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Router>
     </Provider>

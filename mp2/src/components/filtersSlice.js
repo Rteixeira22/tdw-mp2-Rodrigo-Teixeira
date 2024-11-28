@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Estado inicial com filtros vazios
 const initialState = {
   category: "",
   ingredient: "",
@@ -20,7 +19,6 @@ const filtersSlice = createSlice({
   },
 });
 
-// Exportando as ações
 export const { setFilters, resetFilters } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

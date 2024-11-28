@@ -1,16 +1,24 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../imgs/logo.png";
 
-import { NavBarToggle, Hamburger, NavLi, Bar, MainNav, NavA } from "./styles";
+import { NavBarToggle, Hamburger, Bar, MainNav, NavA } from "./styles";
 
 const Logo = styled.img`
   display: inline-block;
   font-size: 22px;
   margin-top: 10px;
   margin-left: 20px;
-  height: 60px; /* Ajuste o tamanho conforme necessário */
+  height: 60px;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    color: #0056b3;
+  }
 `;
 
 const Navbar = (props) => {
@@ -37,7 +45,7 @@ const Navbar = (props) => {
       </div>
 
       <MainNav style={{ display: displayNav }}>
-        <Link to="/">
+        <Link to="/about" className="text-decoration-none">
           <NavA>About</NavA>
         </Link>
       </MainNav>

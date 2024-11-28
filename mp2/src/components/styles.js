@@ -16,6 +16,7 @@ export const Bar = styled.nav`
 export const MainNav = styled.ul`
   list-style-type: none;
   flex-direction: column;
+  text-decoration: none;
   @media (min-width: 768px) {
     display: flex !important;
     margin-right: 30px;
@@ -31,13 +32,24 @@ export const NavLi = styled.li`
 `;
 export const NavA = styled.a`
   display: flex;
-  color: #000;
+  color: #009bff;
   text-decoration: none;
   flex-direction: column;
   @media (min-width: 768px) {
     margin: 0px 10px;
   }
   cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    color: #0056b3;
+  }
 `;
 
 export const NavBarToggle = styled.span`
@@ -368,4 +380,79 @@ export const LoaderText = styled.p`
   font-size: 18px;
   color: #009dff;
   font-weight: bold;
+`;
+
+export const AboutContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+`;
+
+export const Section = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const Title = styled.h2`
+  font-size: 24px;
+  color: #333;
+  margin-top: 40px;
+  margin-bottom: 10px;
+`;
+
+export const Paragraph = styled.p`
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+`;
+
+export const IconText = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    color: #0056b3;
+  }
+`;
+
+export const IconWithText = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o ícone e o texto */
+`;
+
+export const StyledIcon = styled.div`
+  font-size: 24px;
+  color: #007bff;
+  transition: color 0.3s ease;
+
+  ${IconText}:hover & {
+    color: #0056b3;
+  }
+`;
+
+export const LinkStyled = styled.a`
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin-left: 10px;
+
+  &:hover {
+    color: #0056b3;
+  }
+`;
+
+export const Image = styled.img`
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
 `;
