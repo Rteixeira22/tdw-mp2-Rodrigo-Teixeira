@@ -15,30 +15,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: "22"
 
-      - name: Lint
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./mp2
+
+      - name: Run lint
         run: npm run lint
         working-directory: ./mp2
 
-      - name: Prettier
-        run: npm run prettier
+      - name: Run prettier
+        run: npx prettier --write --check .
         working-directory: ./mp2
 
       - name: Jest
         run: npm run coverage
         working-directory: ./mp2
 
-      - name: Upload dos Resultados para o Codecov
-        uses: codecov/codecov-action@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./mp2/coverage/coverage-final.json
           flags: unittests
           name: codecov-umbrella
+          fail_ci_if_error: true
 
   Vercel-Preview-Deploy:
     runs-on: ubuntu-latest
