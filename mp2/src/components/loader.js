@@ -1,11 +1,13 @@
 import React from "react";
-//import { HalfCircleSpinner } from "react-spinners/HalfCircleSpinner";
+import { HalfCircleSpinner } from "react-epic-spinners";
+import { LoaderContainer, LoaderText } from "./styles";
 
 function Loader() {
   return (
-    <div>
-      {/* <HalfCircleSpinner color="#36d7b7" size={15} animating={3} /> Loading... */}
-    </div>
+    <LoaderContainer>
+      <HalfCircleSpinner color="#009dff" size={50} />
+      <LoaderText>Loading...</LoaderText>
+    </LoaderContainer>
   );
 }
 

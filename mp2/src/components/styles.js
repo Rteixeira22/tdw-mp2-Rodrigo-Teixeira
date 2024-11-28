@@ -352,3 +352,20 @@ export const PaginationButton = styled.button`
     cursor: not-allowed;
   }
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f9f9f9;
+`;
+
+export const LoaderText = styled.p`
+  margin-top: 16px;
+  font-size: 18px;
+  color: #009dff;
+  font-weight: bold;
+`;

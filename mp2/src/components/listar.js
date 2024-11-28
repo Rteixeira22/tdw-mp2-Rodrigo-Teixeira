@@ -11,6 +11,7 @@ import {
   PaginationButton,
 } from "./styles";
 import { Link } from "react-router-dom";
+import Loader from "../components/loader";
 
 function MealList() {
   const [category, setCategory] = useState("Beef");
@@ -36,7 +37,12 @@ function MealList() {
     fetchCategories();
   }, []);
 
-  if (isLoading) return <p>Loading meals...</p>;
+  if (isLoading)
+    return (
+      <p>
+        <Loader />
+      </p>
+    );
   if (error)
     return <p>Error fetching meals: {error.data?.message || error.error}</p>;
 
