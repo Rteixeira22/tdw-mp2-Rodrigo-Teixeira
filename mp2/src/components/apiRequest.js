@@ -7,7 +7,16 @@ export const mealsApi = createApi({
   }),
   endpoints: (builder) => ({
     fetchMealsByCategory: builder.query({
-      query: (category) => `filter.php?c=${category}`,
+      query: ({ category, area, ingredient }) => {
+        if (category) {
+          return `filter.php?c=${category}`;
+        } else if (area) {
+          return `filter.php?a=${area}`;
+        } else if (ingredient) {
+          return `filter.php?i=${ingredient}`;
+        }
+        return "";
+      },
     }),
     fetchMealById: builder.query({
       query: (mealId) => {
@@ -15,11 +24,15 @@ export const mealsApi = createApi({
       },
     }),
     fetchMealCategories: builder.query({
-      query: (categories) => {
+      query: () => {
         return `categories.php`;
       },
     }),
   }),
 });
 
-export const { useFetchMealsByCategoryQuery, useFetchMealByIdQuery } = mealsApi;
+export const {
+  useFetchMealsByCategoryQuery,
+  useFetchMealByIdQuery,
+  useFetchMealCategoriesQuery,
+} = mealsApi;

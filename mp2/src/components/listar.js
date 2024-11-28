@@ -9,13 +9,19 @@ import {
   ButtonLink,
   PaginationContainer,
   PaginationButton,
-} from "./styles";
+  FilterContainer,
+  FilterWrapper,
+} from "../styles/styles";
 import { Link } from "react-router-dom";
 import Loader from "../components/loader";
 
 function MealList() {
   const [category, setCategory] = useState("Beef");
   const [categories, setCategories] = useState([]);
+  const [area, setArea] = useState("");
+  const [areas, setAreas] = useState([]);
+  const [ingredient, setIngredient] = useState("");
+  const [ingredients, setIngredients] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
 
@@ -23,7 +29,7 @@ function MealList() {
     data: meals,
     isLoading,
     error,
-  } = useFetchMealsByCategoryQuery(category);
+  } = useFetchMealsByCategoryQuery({ category, area, ingredient });
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -35,6 +41,29 @@ function MealList() {
     };
 
     fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const fetchAreas = async () => {
+      const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/list.php?a=list",
+      );
+      const data = await response.json();
+      setAreas(data.meals);
+    };
+
+    fetchAreas();
+  }, []);
+
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/list.php?i=list",
+      );
+      const data = await response.json();
+      setIngredients(data.meals);
+    };
+    fetchIngredients();
   }, []);
 
   if (isLoading)
@@ -61,21 +90,78 @@ function MealList() {
 
   return (
     <MealListContainer>
-      <h1>Meals in Category: {category}</h1>
+      <h1>Search by: {category || area || ingredient}</h1>
 
-      <MealCategorySelect
-        onChange={(e) => {
-          setCategory(e.target.value);
-          setCurrentPage(1);
-        }}
-        value={category}
-      >
-        {categories.map((cat) => (
-          <option key={cat.strCategory} value={cat.strCategory}>
-            {cat.strCategory}
-          </option>
-        ))}
-      </MealCategorySelect>
+      <FilterContainer>
+        <FilterWrapper>
+          <label htmlFor="category-select">Category</label>
+          <MealCategorySelect
+            id="category-select"
+            onChange={(e) => {
+              setCategory(e.target.value);
+              setArea("");
+              setIngredient("");
+              setCurrentPage(1);
+            }}
+            value={category}
+          >
+            <option value="" disabled>
+              Category
+            </option>
+            {categories.map((cat) => (
+              <option key={cat.strCategory} value={cat.strCategory}>
+                {cat.strCategory}
+              </option>
+            ))}
+          </MealCategorySelect>
+        </FilterWrapper>
+
+        <FilterWrapper>
+          <label htmlFor="area-select">Area</label>
+          <MealCategorySelect
+            id="area-select"
+            onChange={(e) => {
+              setArea(e.target.value);
+              setCategory("");
+              setIngredient("");
+              setCurrentPage(1);
+            }}
+            value={area}
+          >
+            <option value="" disabled>
+              Area
+            </option>
+            {areas.map((ar) => (
+              <option key={ar.strArea} value={ar.strArea}>
+                {ar.strArea}
+              </option>
+            ))}
+          </MealCategorySelect>
+        </FilterWrapper>
+
+        <FilterWrapper>
+          <label htmlFor="ingredient-select">Ingredient</label>
+          <MealCategorySelect
+            id="ingredient-select"
+            onChange={(e) => {
+              setIngredient(e.target.value);
+              setArea("");
+              setCategory("");
+              setCurrentPage(1);
+            }}
+            value={ingredient}
+          >
+            <option value="" disabled>
+              Ingredient
+            </option>
+            {ingredients.map((ing) => (
+              <option key={ing.strIngredient} value={ing.strIngredient}>
+                {ing.strIngredient}
+              </option>
+            ))}
+          </MealCategorySelect>
+        </FilterWrapper>
+      </FilterContainer>
 
       <div className="meal-cards">
         {currentMeals.map((meal) => (

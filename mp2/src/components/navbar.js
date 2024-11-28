@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../imgs/logo.png";
 
-import { NavBarToggle, Hamburger, Bar, MainNav, NavA } from "./styles";
+import { NavBarToggle, Hamburger, Bar, MainNav, NavA } from "../styles/styles";
 
 const Logo = styled.img`
   display: inline-block;

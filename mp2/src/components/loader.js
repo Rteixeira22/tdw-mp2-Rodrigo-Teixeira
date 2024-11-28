@@ -1,6 +1,6 @@
 import React from "react";
 import { HalfCircleSpinner } from "react-epic-spinners";
-import { LoaderContainer, LoaderText } from "./styles";
+import { LoaderContainer, LoaderText } from "../styles/styles";
 
 function Loader() {
   return (
