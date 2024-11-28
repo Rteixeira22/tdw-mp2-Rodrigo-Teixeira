@@ -23,7 +23,7 @@ function MealList() {
   const [ingredient, setIngredient] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 16;
 
   const {
     data: meals,

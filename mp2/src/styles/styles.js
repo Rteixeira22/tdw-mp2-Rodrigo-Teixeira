@@ -430,6 +430,7 @@ export const Section = styled.div`
 export const Title = styled.h2`
   font-size: 24px;
   color: #333;
+  font-weight: bold;
   margin-top: 40px;
   margin-bottom: 10px;
 `;
