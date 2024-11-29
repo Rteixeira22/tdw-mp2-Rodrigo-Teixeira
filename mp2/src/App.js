@@ -6,7 +6,7 @@ import Navbar from "./components/navbar";
 import { Provider } from "react-redux";
 import store from "./store";
 import Details from "./pages/details";
-import About from "./components/about";
+import About from "./pages/about";
 
 function App() {
   return (
