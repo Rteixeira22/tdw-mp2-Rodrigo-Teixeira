@@ -34,7 +34,7 @@ function About() {
           categorias, áreas de origem e ingredientes, oferecendo descrições
           detalhadas, imagens atrativas e um vídeo exemplificativo de cada
           refeição. Com recursos a filtragem dinâmica, paginação e integração de
-          tecnologias como React, RTKQuery, Styled-Components, entre outros,
+          tecnologias como React, RTKQuery, Styled-Components, entre outros.
           Meals transforma a experiência de cozinhar em algo prático e
           inspirador para todos.
         </Paragraph>
