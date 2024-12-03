@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFetchMealByIdQuery } from "./apiRequest";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "./favouritesSlice";
 import {
   ContainerDetails,
   MealImageDetails,
@@ -8,12 +10,42 @@ import {
   IngredientsList,
   Instructions,
   VideoSection,
+  FavoriteButton,
+  MealHeader,
+  Notification,
 } from "../styles/styles";
 import Loader from "./loader";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
 function MealDetails() {
   const { mealId } = useParams();
   const { data: meal, isLoading, error } = useFetchMealByIdQuery(mealId);
+
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.favorites);
+
+  const [notification, setNotification] = useState({ message: "", type: "" });
+
+  const isFavorite =
+    meal?.meals?.[0] &&
+    favorites.some((fav) => fav.idMeal === meal.meals[0].idMeal);
+
+  const toggleFavorite = (meal) => {
+    if (isFavorite) {
+      dispatch(removeFavorite(meal.idMeal));
+      setNotification({
+        message: `${meal.strMeal} was removed from favorites`,
+        type: "removed",
+      });
+    } else {
+      dispatch(addFavorite(meal));
+      setNotification({
+        message: `${meal.strMeal} was added to favorites`,
+        type: "added",
+      });
+    }
+    setTimeout(() => setNotification({ message: "", type: "" }), 3000);
+  };
 
   if (isLoading)
     return (
@@ -28,6 +60,11 @@ function MealDetails() {
 
   return (
     <div>
+      {notification.message && (
+        <Notification type={notification.type}>
+          {notification.message}
+        </Notification>
+      )}
       <ContainerDetails>
         {meal.meals?.map((meal) => (
           <div key={meal.idMeal}>
@@ -35,7 +72,22 @@ function MealDetails() {
             <DetailsWrapper>
               <MealImageDetails src={meal.strMealThumb} alt={meal.strMeal} />
               <div>
-                <h1>{meal.strMeal}</h1>
+                <h1>
+                  <MealHeader>
+                    <FavoriteButton
+                      isFavorite={isFavorite}
+                      onClick={() => toggleFavorite(meal)}
+                      aria-label={
+                        isFavorite
+                          ? "Remove from Favorites"
+                          : "Add to Favorites"
+                      }
+                    >
+                      {isFavorite ? <IoMdHeart /> : <IoMdHeartEmpty />}
+                    </FavoriteButton>
+                    {meal.strMeal}
+                  </MealHeader>
+                </h1>
                 <p>Category: {meal.strCategory}</p>
                 <p>Area: {meal.strArea}</p>
                 <p>Ingredients:</p>
