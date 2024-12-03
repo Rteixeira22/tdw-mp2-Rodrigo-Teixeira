@@ -43,37 +43,41 @@ function About() {
       <div>
         <Title>Tech Stacks</Title>
         <IconText>
-          <LinkStyled href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+          <StyledIcon>
             <IconWithText>
               <IoLogoJavascript />
-              JavaScript
+              <LinkStyled href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+                JavaScript
+              </LinkStyled>
             </IconWithText>
-          </LinkStyled>
+          </StyledIcon>
         </IconText>
 
         <IconText>
-          <LinkStyled href="https://react.dev">
+          <StyledIcon>
             <IconWithText>
               <FaReact />
-              React
+              <LinkStyled href="https://react.dev">React</LinkStyled>
             </IconWithText>
-          </LinkStyled>
+          </StyledIcon>
         </IconText>
 
         <IconText>
-          <LinkStyled href="https://eslint.org">
+          <StyledIcon>
             <IconWithText>
               <SiEslint />
-              EsLint
+              <LinkStyled href="https://eslint.org">EsLint</LinkStyled>
             </IconWithText>
-          </LinkStyled>
+          </StyledIcon>
         </IconText>
+
         <IconText>
           <StyledIcon>
             <SiPrettier />
           </StyledIcon>
           <LinkStyled href="https://prettier.io">Prettier</LinkStyled>
         </IconText>
+
         <IconText>
           <StyledIcon>
             <SiJest />

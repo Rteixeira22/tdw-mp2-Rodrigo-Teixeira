@@ -168,6 +168,7 @@ export const MealCard = styled.div`
   width: 200px;
   height: 350px;
   display: inline-block;
+  position: relative;
 
   vertical-align: top;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -188,7 +189,7 @@ export const MealImage = styled.img`
 
 export const MealTitle = styled.h3`
   font-size: 18px;
-  margin-top: 10px;
+  margin-top: 15px;
   color: #333;
   font-weight: bold;
 `;
@@ -303,9 +304,13 @@ export const VideoSection = styled.div`
 `;
 
 export const ButtonLink = styled.button`
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
   display: inline-block;
   padding: 8px 16px;
-  margin-top: 15px;
   background-color: #009dff;
   opacity: 0.9;
   color: #fff;
@@ -324,13 +329,13 @@ export const ButtonLink = styled.button`
 
   &:hover {
     background-color: #0056b3;
-    transform: translateY(-2px);
+    transform: translate(-50%, -2px);
     box-shadow: 0 5px 10px rgba(0, 86, 179, 0.3);
   }
 
   &:active {
     background-color: #004085;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
     box-shadow: 0 3px 5px rgba(0, 64, 133, 0.3);
   }
 `;
@@ -546,5 +551,79 @@ export const MealCategorySelect = styled.select`
     font-size: 14px;
     color: #333;
     background-color: #fff;
+  }
+`;
+
+export const MealHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const FavoriteButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition:
+    transform 0.2s ease,
+    color 0.3s ease;
+
+  color: ${(props) => (props.isFavorite ? "#dc3545" : "#007bff")};
+
+  &:hover {
+    transform: scale(1.2);
+    color: ${(props) => (props.isFavorite ? "#c82333" : "#0056b3")};
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+export const Notification = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: ${({ type }) => (type === "added" ? "#28a745" : "#dc3545")};
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  z-index: 1000;
+  animation: fade-in-out 3s ease-in-out;
+  text-align: center;
+
+  @keyframes fade-in-out {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+    }
+    20% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+    }
   }
 `;
