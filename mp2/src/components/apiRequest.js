@@ -23,11 +23,6 @@ export const mealsApi = createApi({
         return `lookup.php?i=${mealId}`;
       },
     }),
-    fetchMealCategories: builder.query({
-      query: () => {
-        return `categories.php`;
-      },
-    }),
   }),
 });
 
