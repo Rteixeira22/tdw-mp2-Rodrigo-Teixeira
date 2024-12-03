@@ -1,11 +1,11 @@
 import React from "react";
 import FavList from "../components/favComponents";
 
-const Favourites = () => {
+const Favorites = () => {
   return (
     <div>
       <FavList />
     </div>
   );
 };
-export default Favourites;
+export default Favorites;

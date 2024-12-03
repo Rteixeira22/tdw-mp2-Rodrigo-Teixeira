@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Details from "./pages/details";
 import About from "./pages/about";
-import Favourites from "./pages/favourites";
+import Favorites from "./pages/favorites";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/details/:mealId" element={<Details />} />
           <Route path="/about" element={<About />} />
-          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </Router>
     </Provider>

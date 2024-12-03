@@ -45,8 +45,8 @@ const Navbar = (props) => {
       </div>
 
       <MainNav style={{ display: displayNav }}>
-        <Link to="/favourites" className="text-decoration-none me-5">
-          <NavA>Favourites</NavA>
+        <Link to="/favorites" className="text-decoration-none me-5">
+          <NavA>Favorites</NavA>
         </Link>
         <Link to="/about" className="text-decoration-none">
           <NavA>About</NavA>
